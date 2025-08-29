@@ -1,0 +1,767 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Elyssa DeGracia - Virtual Assistant Portfolio</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .header {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 40px;
+            text-align: center;
+            margin-bottom: 30px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.18);
+        }
+
+        .profile-image {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            margin: 0 auto 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 4rem;
+            color: white;
+            font-weight: bold;
+        }
+
+        h1 {
+            color: #2c3e50;
+            margin-bottom: 10px;
+            font-size: 2.5rem;
+        }
+
+        .tagline {
+            color: #7f8c8d;
+            font-size: 1.2rem;
+            margin-bottom: 20px;
+        }
+
+        .contact-info {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            flex-wrap: wrap;
+        }
+
+        .contact-item {
+            color: #666;
+            font-size: 0.95rem;
+        }
+
+        .nav-tabs {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .tab-button {
+            background: rgba(255, 255, 255, 0.2);
+            border: none;
+            padding: 12px 24px;
+            border-radius: 25px;
+            color: white;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 500;
+            backdrop-filter: blur(10px);
+        }
+
+        .tab-button:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: translateY(-2px);
+        }
+
+        .tab-button.active {
+            background: rgba(255, 255, 255, 0.9);
+            color: #333;
+        }
+
+        .content-section {
+            display: none;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.18);
+            animation: fadeIn 0.5s ease-in;
+        }
+
+        .content-section.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .section-title {
+            color: #2c3e50;
+            font-size: 2rem;
+            margin-bottom: 30px;
+            text-align: center;
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 50px;
+            height: 3px;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            border-radius: 2px;
+        }
+
+        .service-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 20px;
+        }
+
+        .service-card {
+            background: rgba(102, 126, 234, 0.1);
+            border-radius: 15px;
+            padding: 30px;
+            text-align: center;
+            transition: transform 0.3s ease;
+            border: 2px solid transparent;
+        }
+
+        .service-card:hover {
+            transform: translateY(-10px);
+            border-color: rgba(102, 126, 234, 0.3);
+        }
+
+        .service-icon {
+            font-size: 3rem;
+            margin-bottom: 20px;
+            display: block;
+        }
+
+        .service-title {
+            font-size: 1.3rem;
+            color: #2c3e50;
+            font-weight: 600;
+            margin-bottom: 15px;
+        }
+
+        .service-description {
+            color: #555;
+            line-height: 1.6;
+        }
+
+        .experience-item {
+            background: rgba(102, 126, 234, 0.1);
+            border-radius: 15px;
+            padding: 25px;
+            margin-bottom: 25px;
+            border-left: 4px solid #667eea;
+            transition: transform 0.3s ease;
+        }
+
+        .experience-item:hover {
+            transform: translateX(10px);
+        }
+
+        .job-title {
+            font-size: 1.3rem;
+            color: #2c3e50;
+            font-weight: 600;
+            margin-bottom: 5px;
+        }
+
+        .company-date {
+            color: #7f8c8d;
+            font-size: 0.95rem;
+            margin-bottom: 15px;
+        }
+
+        .job-description {
+            color: #555;
+        }
+
+        .job-description ul {
+            padding-left: 20px;
+        }
+
+        .job-description li {
+            margin-bottom: 8px;
+        }
+
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 20px;
+        }
+
+        .skill-category {
+            background: rgba(102, 126, 234, 0.1);
+            border-radius: 15px;
+            padding: 25px;
+        }
+
+        .skill-category h3 {
+            color: #2c3e50;
+            margin-bottom: 15px;
+            font-size: 1.2rem;
+        }
+
+        .skill-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+            padding: 8px 0;
+        }
+
+        .stars {
+            color: #f39c12;
+        }
+
+        .project-card {
+            background: rgba(102, 126, 234, 0.1);
+            border-radius: 15px;
+            padding: 25px;
+            margin-bottom: 25px;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .project-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(102, 126, 234, 0.2);
+        }
+
+        .project-title {
+            font-size: 1.3rem;
+            color: #2c3e50;
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
+
+        .project-type {
+            color: #667eea;
+            font-size: 0.9rem;
+            font-weight: 500;
+            margin-bottom: 15px;
+        }
+
+        .project-description {
+            color: #555;
+            margin-bottom: 15px;
+        }
+
+        .project-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-bottom: 15px;
+        }
+
+        .tag {
+            background: rgba(102, 126, 234, 0.2);
+            color: #667eea;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 500;
+        }
+
+        .expand-btn {
+            background: #667eea;
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 0.85rem;
+            transition: background 0.3s ease;
+        }
+
+        .expand-btn:hover {
+            background: #5a6fd8;
+        }
+
+        .project-sample {
+            display: none;
+            margin-top: 20px;
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.8);
+            border-radius: 10px;
+            border-left: 4px solid #667eea;
+            max-height: 300px;
+            overflow-y: auto;
+        }
+
+        .project-sample.expanded {
+            display: block;
+        }
+
+        .sample-title {
+            font-weight: 600;
+            color: #2c3e50;
+            margin-bottom: 10px;
+        }
+
+        .sample-text {
+            color: #555;
+            line-height: 1.6;
+            font-size: 0.9rem;
+        }
+
+        .education-item {
+            background: rgba(102, 126, 234, 0.1);
+            border-radius: 15px;
+            padding: 25px;
+            margin-bottom: 20px;
+        }
+
+        .degree {
+            font-size: 1.2rem;
+            color: #2c3e50;
+            font-weight: 600;
+            margin-bottom: 5px;
+        }
+
+        .school {
+            color: #667eea;
+            font-weight: 500;
+            margin-bottom: 5px;
+        }
+
+        .date {
+            color: #7f8c8d;
+            font-size: 0.9rem;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 10px;
+            }
+            
+            .header {
+                padding: 30px 20px;
+            }
+            
+            h1 {
+                font-size: 2rem;
+            }
+            
+            .contact-info {
+                flex-direction: column;
+                gap: 10px;
+            }
+            
+            .nav-tabs {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .content-section {
+                padding: 25px 20px;
+            }
+            
+            .service-grid,
+            .skills-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <header class="header">
+            <div class="profile-image">ED</div>
+            <h1>Elyssa DeGracia</h1>
+            <div class="tagline">Virtual Assistant • Data Entry Specialist • E-commerce/Product Listing Expert</div>
+            <div class="contact-info">
+                <div class="contact-item">Philippines</div>
+                <div class="contact-item">Remote Work Available</div>
+                <div class="contact-item">Freelance & Full-time</div>
+            </div>
+        </header>
+
+        <!-- Navigation Tabs -->
+        <nav class="nav-tabs">
+            <button class="tab-button active" onclick="showSection('services')">Services</button>
+            <button class="tab-button" onclick="showSection('experience')">Experience</button>
+            <button class="tab-button" onclick="showSection('skills')">Skills</button>
+            <button class="tab-button" onclick="showSection('projects')">Writing Samples</button>
+            <button class="tab-button" onclick="showSection('education')">Education</button>
+        </nav>
+
+        <!-- Services Section -->
+        <section id="services" class="content-section active">
+            <h2 class="section-title">My Services</h2>
+            
+            <div class="service-grid">
+                <div class="service-card">
+                    <div class="service-icon">💻</div>
+                    <div class="service-title">Virtual Assistant</div>
+                    <div class="service-description">
+                        Comprehensive administrative support including email management, appointment scheduling, document organization, and customer service. I help streamline your daily operations so you can focus on growing your business.
+                    </div>
+                </div>
+
+                <div class="service-card">
+                    <div class="service-icon">📊</div>
+                    <div class="service-title">Data Entry</div>
+                    <div class="service-description">
+                        Accurate and efficient data entry services for databases, spreadsheets, and various platforms. Experienced in managing large datasets, maintaining data integrity, and creating organized systems for easy access and analysis.
+                    </div>
+                </div>
+
+                <div class="service-card">
+                    <div class="service-icon">🛒</div>
+                    <div class="service-title">E-commerce/Product Listing</div>
+                    <div class="service-description">
+                        Complete e-commerce support including product listing optimization, inventory management, order processing, and marketplace coordination. I help maximize your online sales potential across multiple platforms.
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Experience Section -->
+        <section id="experience" class="content-section">
+            <h2 class="section-title">Professional Experience</h2>
+            
+            <div class="experience-item">
+                <div class="job-title">Listing Coordinator (Freelance)</div>
+                <div class="company-date">E-commerce / Remote • December 2024 - April 2025</div>
+                <div class="job-description">
+                    <ul>
+                        <li>Managed and updated product listings across various online platforms</li>
+                        <li>Coordinated with clients to collect product details, photos, and descriptions</li>
+                        <li>Monitored and optimized listings for better engagement and lead generation</li>
+                        <li>Maintained organized and up-to-date product data records</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="experience-item">
+                <div class="job-title">Data Entry / Virtual Assistant</div>
+                <div class="company-date">Administrative Support / Remote • January 2023 - December 2024</div>
+                <div class="job-description">
+                    <ul>
+                        <li>Performed accurate data entry and database management for multiple clients</li>
+                        <li>Managed email inboxes, scheduled appointments, and organized documents</li>
+                        <li>Prepared and updated reports to track project progress</li>
+                        <li>Provided customer support and handled task prioritization effectively</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="experience-item">
+                <div class="job-title">Headline and Email Writer</div>
+                <div class="company-date">Marketing & Copywriting / Remote • January 2023 - December 2023</div>
+                <div class="job-description">
+                    <ul>
+                        <li>Wrote compelling marketing emails and attention-grabbing headlines</li>
+                        <li>Ensured content aligned with client branding and campaign goals</li>
+                        <li>Conducted basic market research to improve messaging strategies</li>
+                        <li>Edited and proofread content for accuracy and clarity</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- Skills Section -->
+        <section id="skills" class="content-section">
+            <h2 class="section-title">Skills & Tools</h2>
+            
+            <div class="skills-grid">
+                <div class="skill-category">
+                    <h3>Technical Tools</h3>
+                    <div class="skill-item">
+                        <span>Google Sheets</span>
+                        <div class="stars">⭐⭐⭐⭐☆</div>
+                    </div>
+                    <div class="skill-item">
+                        <span>Canva</span>
+                        <div class="stars">⭐⭐⭐⭐☆</div>
+                    </div>
+                    <div class="skill-item">
+                        <span>Google Calendar</span>
+                        <div class="stars">⭐⭐⭐⭐⭐</div>
+                    </div>
+                    <div class="skill-item">
+                        <span>Excel</span>
+                        <div class="stars">⭐⭐⭐⭐☆</div>
+                    </div>
+                </div>
+
+                <div class="skill-category">
+                    <h3>Core Services</h3>
+                    <div class="skill-item">
+                        <span>Data Entry & Management</span>
+                        <div class="stars">⭐⭐⭐⭐⭐</div>
+                    </div>
+                    <div class="skill-item">
+                        <span>Product Listing</span>
+                        <div class="stars">⭐⭐⭐⭐⭐</div>
+                    </div>
+                    <div class="skill-item">
+                        <span>Email Management</span>
+                        <div class="stars">⭐⭐⭐⭐⭐</div>
+                    </div>
+                    <div class="skill-item">
+                        <span>Customer Service</span>
+                        <div class="stars">⭐⭐⭐⭐⭐</div>
+                    </div>
+                </div>
+
+                <div class="skill-category">
+                    <h3>Languages</h3>
+                    <div class="skill-item">
+                        <span>English</span>
+                        <div class="stars">⭐⭐⭐⭐⭐</div>
+                    </div>
+                    <div class="skill-item">
+                        <span>Filipino</span>
+                        <div class="stars">⭐⭐⭐⭐⭐</div>
+                    </div>
+                </div>
+
+                <div class="skill-category">
+                    <h3>Soft Skills</h3>
+                    <div class="skill-item">
+                        <span>Time Management</span>
+                        <div class="stars">⭐⭐⭐⭐⭐</div>
+                    </div>
+                    <div class="skill-item">
+                        <span>Communication</span>
+                        <div class="stars">⭐⭐⭐⭐⭐</div>
+                    </div>
+                    <div class="skill-item">
+                        <span>Problem Solving</span>
+                        <div class="stars">⭐⭐⭐⭐☆</div>
+                    </div>
+                    <div class="skill-item">
+                        <span>Attention to Detail</span>
+                        <div class="stars">⭐⭐⭐⭐⭐</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Writing Samples Section -->
+        <section id="projects" class="content-section">
+            <h2 class="section-title">Writing Samples & Project Work</h2>
+            
+            <div class="project-card" onclick="toggleSample('research')">
+                <div class="project-title">Action Research: E-Learning Intervention Program</div>
+                <div class="project-type">Academic Research & Project Management</div>
+                <div class="project-description">
+                    Comprehensive research project focused on improving e-learning modalities for visually impaired students through systematic intervention programs.
+                </div>
+                <div class="project-tags">
+                    <span class="tag">Research Design</span>
+                    <span class="tag">Data Analysis</span>
+                    <span class="tag">Project Management</span>
+                    <span class="tag">Report Writing</span>
+                </div>
+                <button class="expand-btn">View Sample</button>
+                
+                <div id="research" class="project-sample">
+                    <div class="sample-title">Project Kanlungan: An Intervention Program Administration</div>
+                    <div class="sample-text">
+                        <strong>Context and Rationale:</strong><br>
+                        E-learning has emerged as an invaluable resource in recent years, making it accessible to a growing number of students who are visually impaired. The use of this technology can facilitate remote learning for students with visual impairments... This project attempts to encourage individuals with visual impairments to engage in online learning and support those who are experiencing problems.<br><br>
+                        
+                        <strong>Research Questions:</strong><br>
+                        1. What is the level of performance of visually impaired learners who are falling behind in terms of skills in mathematics and understanding in comprehension?<br>
+                        2. What is the level of performance following the implementation of Project Kanlungan?<br><br>
+                        
+                        <strong>Innovation and Strategy:</strong><br>
+                        This effort led to the development of Project Kanlungan, a mobile community tutorial with the objective of increasing the skills of visually impaired students. The project included home visits, parent coordination, and community learning centers following safety protocols during the COVID-19 pandemic.
+                    </div>
+                </div>
+            </div>
+
+            <div class="project-card" onclick="toggleSample('business')">
+                <div class="project-title">Business Case Study Analysis</div>
+                <div class="project-type">Strategic Business Analysis</div>
+                <div class="project-description">
+                    Detailed analysis of multiple business scenarios including distribution challenges, sales management strategies, and dealer relations improvement.
+                </div>
+                <div class="project-tags">
+                    <span class="tag">Business Analysis</span>
+                    <span class="tag">Strategic Planning</span>
+                    <span class="tag">Problem Solving</span>
+                    <span class="tag">Recommendations</span>
+                </div>
+                <button class="expand-btn">View Sample</button>
+                
+                <div id="business" class="project-sample">
+                    <div class="sample-title">Case Study: The Banner Company - Distribution Improvement</div>
+                    <div class="sample-text">
+                        <strong>Issue Analysis:</strong><br>
+                        The Spokane branch territory grew rapidly, its market area and expanding population resulted in a large amount of missionary and sales work for sales representatives. This means that sales representatives were unable to spend sufficient time in the effective solicitation of new accounts.<br><br>
+                        
+                        <strong>Potential Solutions:</strong><br>
+                        1. Technology Integration: Extend service using tools that provide balanced work for sales representatives, reducing workload and helping staff focus on core issues.<br>
+                        2. Staffing Solutions: Hire additional staff to handle expanded territory coverage and balance workload distribution.<br><br>
+                        
+                        <strong>Recommendation:</strong><br>
+                        The best solution involves strategic hiring with proper recruitment processes including applicant screening, candidate interviews, background checks, and comprehensive training to ensure successful integration and performance.
+                    </div>
+                </div>
+            </div>
+
+            <div class="project-card" onclick="toggleSample('creative')">
+                <div class="project-title">Creative Writing Sample</div>
+                <div class="project-type">Creative Content & Storytelling</div>
+                <div class="project-description">
+                    Demonstrates creative writing abilities and storytelling skills that translate well to content creation and marketing copy.
+                </div>
+                <div class="project-tags">
+                    <span class="tag">Creative Writing</span>
+                    <span class="tag">Storytelling</span>
+                    <span class="tag">Content Creation</span>
+                    <span class="tag">Descriptive Writing</span>
+                </div>
+                <button class="expand-btn">View Sample</button>
+                
+                <div id="creative" class="project-sample">
+                    <div class="sample-title">"Euphoria"</div>
+                    <div class="sample-text">
+                        The sky is bluer and the sun is brighter for the blithe girl. She does not need to be concerned about the ominous clouds traveling behind the path. She does not need to beg the moon to shine brighter in the gloomy nights, all she has is delight.<br><br>
+                        
+                        The breeze was blowing softly against the back of her neck as the trees were in full bloom with swirls of green waving across the clear blue sky. She sprinted for a few split seconds in the direction of the mural's green scenery. She was thinking to herself, "It's going to be a long day."<br><br>
+                        
+                        The sweeping vista of the surrounding landscape that can be seen from the peak of the mountain is unparalleled by anything that can be seen from the tallest structures in the city. All that she wanted was to see the purple wine cup flower at her favorite spot before it closed its petals for the night...
+                    </div>
+                </div>
+            </div>
+
+            <div class="project-card" onclick="toggleSample('technical')">
+                <div class="project-title">Technical Research & Analysis</div>
+                <div class="project-type">Technical Documentation</div>
+                <div class="project-description">
+                    Comprehensive research on capacitance and dielectrics, demonstrating ability to understand and document complex technical concepts.
+                </div>
+                <div class="project-tags">
+                    <span class="tag">Technical Writing</span>
+                    <span class="tag">Research</span>
+                    <span class="tag">Data Analysis</span>
+                    <span class="tag">Documentation</span>
+                </div>
+                <button class="expand-btn">View Sample</button>
+                
+                <div id="technical" class="project-sample">
+                    <div class="sample-title">Capacitance and Dielectrics Research</div>
+                    <div class="sample-text">
+                        <strong>Introduction:</strong><br>
+                        The capacity to store energy is rapidly becoming an indispensable component in a wide variety of systems. When compared to other types of energy storage technology, supercapacitors have a number of advantages, the most notable of which are their high power density and long cycle life.<br><br>
+                        
+                        <strong>Technical Analysis:</strong><br>
+                        A capacitor is a piece of electronic equipment that can be used to store electrical charge as well as electrical energy. It is made up of at least two electrical conductors that are physically separated from one another. The capacitance C of a capacitor is defined as the ratio of the maximum charge Q that can be held in a capacitor to the voltage V that is applied across its plates.<br><br>
+                        
+                        <strong>Practical Applications:</strong><br>
+                        Capacitors are commonly employed in electrical circuits because of their ability to prevent the passage of direct current (dc) while allowing alternating current (ac) to pass through.
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Education Section -->
+        <section id="education" class="content-section">
+            <h2 class="section-title">Education</h2>
+            
+            <div class="education-item">
+                <div class="degree">Bachelor of Science in Business Administration (HRM)</div>
+                <div class="school">Divine Word College of Legazpi</div>
+                <div class="date">2017 - 2019 (3rd Year Level - Undergraduate)</div>
+            </div>
+
+            <div class="education-item">
+                <div class="degree">General Academic Strand - Senior High School</div>
+                <div class="school">Pag-asa National High School</div>
+                <div class="date">2013 - 2017</div>
+            </div>
+        </section>
+    </div>
+
+    <script>
+        function showSection(sectionId) {
+            // Hide all sections
+            const sections = document.querySelectorAll('.content-section');
+            sections.forEach(section => section.classList.remove('active'));
+            
+            // Remove active class from all buttons
+            const buttons = document.querySelectorAll('.tab-button');
+            buttons.forEach(button => button.classList.remove('active'));
+            
+            // Show selected section
+            document.getElementById(sectionId).classList.add('active');
+            
+            // Add active class to clicked button
+            event.target.classList.add('active');
+            
+            // Smooth scroll to top of content
+            document.querySelector('.content-section.active').scrollIntoView({
+                behavior: 'smooth',
+                block: 'start'
+            });
+        }
+
+        function toggleSample(sampleId) {
+            const sample = document.getElementById(sampleId);
+            const isExpanded = sample.classList.contains('expanded');
+            
+            // Close all other samples
+            const allSamples = document.querySelectorAll('.project-sample');
+            allSamples.forEach(s => s.classList.remove('expanded'));
+            
+            // Toggle current sample
+            if (!isExpanded) {
+                sample.classList.add('expanded');
+            }
+        }
+
+        // Add loading animation
+        window.addEventListener('load', function() {
+            document.body.style.opacity = '0';
+            document.body.style.transition = 'opacity 0.5s ease-in';
+            setTimeout(() => {
+                document.body.style.opacity = '1';
+            }, 100);
+        });
+    </script>
+</body>
+</html>
